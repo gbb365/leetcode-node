@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  
+  <link rel="shortcut icon" href="../../img/favicon.ico">
+  <title>MySQL实战45讲整理 - My Docs</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
+
+  <link rel="stylesheet" href="../../css/theme.css" />
+  <link rel="stylesheet" href="../../css/theme_extra.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" />
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "MySQL\u5b9e\u621845\u8bb2\u6574\u7406";
+    var mkdocs_page_input_path = "\u7b2c\u4e8c\u7ae0\\MySQL\u5b9e\u621845\u8bb2\u6574\u7406.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+        <a href="../.." class="icon icon-home"> My Docs</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="" href="../../about.md">about</a>
+                    </li>
+                </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../..">My Docs</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../..">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>MySQL实战45讲整理</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        <a href="https://github.com/gbb365/leetcode-node.git/edit/master/docs/第二章/MySQL实战45讲整理.md"
+          class="icon icon-github"> Edit on GitHub</a>
+      
+    </li>
+  </ul>
+  
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h3 id="_1">一条查询语句是怎么执行的</h3>
+<p>数据库的多版本并发控制（MVCC）</p>
+<p>大体上，MySQL课一分成Server和储存引擎层两部分</p>
+<p>Server层包括连接器、查询缓存、分析器、优化器、执⾏器等，涵盖MySQL的⼤多数核⼼服务功能，以及所有的内置函数 （如⽇期、时间、数学和加密函数等），所有跨存储引擎的功能都在这⼀层实现，⽐如存储过程、触发器、视图等。</p>
+<p>而存储引擎层负责数据的存储和提取。其架构模式是插件式的，⽀持InnoDB、MyISAM、Memory等多个存储引擎。</p>
+<p><strong>连接器</strong></p>
+<p>连接器负责与客户端建立连接、获取权限、维持和管理连接。</p>
+<p><strong>查询缓存</strong></p>
+<p>当得到一个查询请求的时候，首先会去查询缓存中查看时候有执行过这条语句。执行过的语句和结果会以
+key-value的形式缓存在内存中。查不到，继续后面的执行。</p>
+<p><strong>分析器</strong></p>
+<p>对查询语句进行词法分析、语法分析。判断表名、列名，然后进行语句是否符合MySQL的语法</p>
+<p><strong>优化器</strong></p>
+<p>可以选择使用哪个索引。提高语句的执行效率。优化器阶段完成后，这个语句的执⾏⽅案就确定下来了，然后进⼊执⾏器阶段。</p>
+<p><strong>执行器</strong></p>
+<p>执行语句。执行之前会检查是否有执行权限。没有就会返回权限的错误。</p>
+<hr />
+<h3 id="sql">一条sql更新语句是怎样执行的</h3>
+<p>在一个表有更新的时候，跟这个表相关的查询缓存就会失效，这也是不推荐使用缓存的原因。</p>
+<p>与查询流程不⼀样的是，更新流程还涉及两个重要的⽇志模块，它们正是我们今天要讨论的主⻆：redo log（重做⽇志）和 binlog（归档⽇志）。</p>
+<p>类比孔乙己的粉板和账本配的过程，其实就是MySQL里面的WAL技术（Write-Ahead Logging）。它的关键点是先写日志，再写磁盘（减少写进磁盘，找到对应的记录，再更新的IO、查找成本）。具体来说，当有⼀条记录需要更新的时候，InnoDB引擎就会先把记录写到redo log（粉板）⾥⾯，并更新内存，这个时候更新就算完成了。同时，InnoDB引擎会在适当的时候，将这个操作记录更新到磁盘⾥⾯，⽽这个更新往往是在系统比较空闲的时候。但是innodb的redo log是固定大小的。例如可以配置一组4个文件，从头开始写，写到末尾就⼜回到开头循环写。write pos是当前记录的位置，⼀边写⼀边后移，写到第3号⽂件末尾后就回到0号⽂件开头。checkpoint是当前要擦除的位置， 也是往后推移并且循环的，擦除记录前要把记录更新到数据⽂件。write pos和checkpoint之间还空着的部分，可以⽤来记录新的操作。有了 <strong>redo log</strong>，数据库异常重启，之前提交的记录都不会丢失，成为<strong>cache-safe</strong></p>
+<p>板redo log是InnoDB引擎特有的⽇志，⽽Server层也有⾃⼰的⽇志，称为 binlog（归档⽇志）。 </p>
+<p>不同点：</p>
+<ul>
+<li>
+<p>redo log是InnoDB引擎特有的；binlog是MySQL的Server层实现的，所有引擎都可以使⽤。 </p>
+</li>
+<li>
+<p>redo log是物理⽇志，记录的是“在某个数据⻚上做了什么修改”；binlog是逻辑⽇志，记录的是这个语句的原始逻辑，⽐ 如“给ID=2这⼀⾏的c字段加1 ”。</p>
+</li>
+<li>redo log是循环写的，空间固定会⽤完；binlog是记录所有的操作逻辑，可以追加写⼊的。“追加写”是指binlog⽂件写到⼀定⼤⼩后会切换到下⼀ 个，并不会覆盖以前的⽇志。 </li>
+</ul>
+<p><strong>什么两次提交：</strong></p>
+<p>执行器执行阶段，引擎将这⾏新数据更新到内存中，同时将这个更新操作记录到redo log⾥⾯，此时redo log处prepare状态。然后告知执 ⾏器执⾏完成了，随时可以提交事务。  执⾏器⽣成这个操作的binlog，并把binlog写⼊磁盘。  执⾏器调⽤引擎的提交事务接⼝，引擎把刚刚写⼊的redo log改成提交（commit）状态，更新完成。 </p>
+<p><strong>为什么需要两段提交：</strong></p>
+<p><code>update table user set c= 1 where id = 2</code></p>
+<p>由于redo log和binlog是两个独⽴的逻辑，如果不⽤两阶段提交，会使数据库出现不一致的问题</p>
+<ul>
+<li>先写redo log 后写binlog。假设redo log写完了，binlog没写完，然后数据库异常重启了。可以用redo log进行数据恢复，c = 1。但是binlog没写完，日志中没有让c = 1这个逻辑，之后的备份日志也没有这个语句。当某天用binlog恢复临时库的时候，就会少了一条更新，恢复出来的c是原来的0，与原库不一致。</li>
+<li>先写binlog再写redo log。如果binlog写完了，但是redo log没写完，恢复以后这个事务无效，c仍然为0。但是bin log已经记录了“把c从0改成1”这个日志。之后用binlog恢复的时候就多出一个事务来，c为1，与原来的状态不一致。</li>
+</ul>
+<p><strong>两段提交可能出现的情况：</strong></p>
+<ol>
+<li>redo log prepare 2. 写binlog 3. redolog commit</li>
+</ol>
+<p>在2之前崩溃：重启恢复，发现没有commit，回滚。备份恢复，没有binlog，一执</p>
+<p>在2之前崩溃：重启恢复，没有commit，但是满足prepare和binlog完整。重启自动恢复。备份，有binlog，一致</p>
+<hr />
+<h3 id="_2">事务隔离</h3>
+<blockquote>
+<p>事务就是要保证⼀组数据库操作，要么全部成功，要么全部失败。</p>
+</blockquote>
+<p>事务的特性：原子性、一致性、隔离性、持久性（ACID）</p>
+<p>事务并发执行可能出现的问题：</p>
+<ul>
+<li>脏读：当数据库中⼀个事务A正在修改⼀个数据但是还未提交或者回滚， 另⼀个事务B 来读取了修改后的内容并且使⽤了， 之后事务A提交了，此时就引起了脏读。 此情况仅会发⽣在： 读未提交的的隔离级别</li>
+<li>不可重复读：在⼀个事务A中多次操作数据，在事务操作过程中(未最终提交)， 事务B也才做了处理，并且该值发⽣了改变，这时候就会导致A在事务操作 的时候，发现数据与第⼀次不⼀样了。 就是不可重复读。 此情况仅会发⽣在：读未提交、读提交的隔离级别. </li>
+<li><strong>幻读</strong>：⼀个事务按<strong>相同的查询条件</strong>重新读取以前检索过的数据， 却发现其他事务<strong>插⼊了满⾜其查询条件的新数据</strong>，这种现象就称为幻读。 幻读是指当事务不是独⽴执⾏时发⽣的⼀种现象，例如第⼀个事务对⼀个表中的数据进⾏了修改，⽐如这种修改涉及到表中的“ 全部数据⾏”。同时，第⼆个事务也修改这个表中的数据，这种修改是向表中插⼊“⼀⾏新数据”。那么，以后就会发⽣操作第⼀ 个事务的⽤户发现表中还存在没有修改的数据⾏，就好象发⽣了幻觉⼀样. ⼀般解决幻读的⽅法是增加范围锁RangeS，锁定检索范围为只读，这样就避免了幻读。 此情况会回发⽣在：读未提交、读提交、可重复读的隔离级别。（A在更新全部行的时候，B插入一行数据，A发现突然多了一行，就像出现幻觉）</li>
+</ul>
+<p>SQL标准的事务隔离级别：</p>
+<ul>
+<li>读未提交：一个事务还没有提交，它做出的变更就可以被其他事务看到</li>
+<li>读已提交：一个事务提交之后，它的变更才被其他事务看到</li>
+<li>可重复读：一个<strong>事务在执行过程中看到的数据</strong>，总是跟这个<strong>事务启动时看到的数据是一致</strong>的。在可重复度隔离级别下，未提交变更对其他事务也是不可见的。事务启动时的视图可以认为是静态的，不受其他事务更新的影响。 （银行对账，别人的行为不影响你自己的账单）</li>
+<li>串行化：对同一行的记录进行读写时进行加锁操作。出现冲突，后访问的事务必须等到前面的事务执行完成，才能继续执行。</li>
+</ul>
+<p><strong>实现：</strong></p>
+<p>视图理解为数据副本，每次创建视图时，将当前『已持久化的数据』创建副本，后续直接从副本读取，从⽽达到数据隔离效果 。</p>
+<p>在实现上，数据库⾥⾯会创建⼀个视图，访问的时候以视图的逻辑结果为准。在“<strong>可重复读</strong>”隔离级别下，这个视图是在事务启 动时创建的，整个事务存在期间都⽤这个视图，因此，在事务任意时刻，对记录读取的值都是⼀样的。 。在“<strong>读提交</strong>”隔离级别下，这个视图是在每个SQL语句开始执⾏的时候创建的。 这⾥需要注意的是，“<strong>读未提交</strong>”隔离级别下<strong>直接返回</strong>记录上的最新值，<strong>没有视图概念</strong>；⽽“串⾏化”隔离级别下直接⽤加锁的⽅ 式来避免并⾏访问。事务隔离的实现：每条记录在更新的时候都会同时记录⼀条回滚操作。同⼀条记录在系统中可以存在多个版本，这就是数 据库的多版本并发控制（MVCC）。</p>
+<hr />
+<h3 id="_3">索引</h3>
+<p>为了提高数据查询的效率，就像书的目录。</p>
+<p>索引常见的模型：哈希表、有序数组、搜索树</p>
+<p><strong>InnoDB的索引模型</strong></p>
+<p>在InnnoDB中，表都是根据主键顺序以索引的形式存放的额，这种存放方式的表称为索引组织表。InnoDB使用了B+树索引模型，数据都是储存到B+树中的。每⼀个索引在InnoDB⾥⾯对应⼀棵B+树。（B+树能够很好地配合磁盘读写特性，减少单次查询磁盘的访问次数）</p>
+<p>根据叶子节点的内容，索引类型分为主键索引和非主键索引。主键索引的叶子节点存的是整行数据。在InnoDB中，主键索引也被称为聚簇索引。非主键索引的叶子节点内容是主键的值，在InnoDB中，非主键索引也被称为二级索引。</p>
+<p>基于主键索引和普通索引的查询有什么区别：</p>
+<ul>
+<li>
+<p>id主键，key是column，设置普通索引</p>
+</li>
+<li>
+<p>如果语句是select * from T where ID=500，即主键查询⽅式，则只需要搜索ID这棵B+树； </p>
+</li>
+<li>
+<p>如果语句是select * from T where k=5，即普通索引查询⽅式，则需要先搜索k索引树，得到ID的值为500，再到ID索引树搜 索⼀次。这个过程称为回表。</p>
+</li>
+</ul>
+<p><em>基于非主键索引的查询需要多扫描一颗索引树，因此在应用中应尽量使用主键索引。</em></p>
+<p><strong>索引的维护</strong></p>
+<p>递增插入、页分裂、页合并</p>
+<ul>
+<li>自增主键是指自增列上定义的主键，</li>
+</ul>
+<p>NOT NULL PRIMARY KEY AUTO_INCREMENT 插入新记录的时候可以不指定ID的值，系统会获取当前ID最大值+1作为下一条记录的ID值（符合递增插入的场景，每次插入都是追加操作，不涉及挪动其他记录或叶子节点的分裂）</p>
+<p>主键长度越小，普通索引的叶子节点就越小，普通索引占用的空间就越小。从时间和储存空间考虑，自增主键往往更加合理。</p>
+<p>重建索引的SQL：</p>
+<pre><code class="language-mysql">alter table T drop index k ; alter table T add index(k)` 
+alter table T drop primary key;alter table T add primary key（id）
+</code></pre>
+<p>不论是删除主键还是创建主键，都会将 整个表重建。所以连着执⾏这两个语句的话，第⼀个语句就⽩做了。这两个语句，你可以⽤这个语句代替 ： alter table T engine=InnoDB。</p>
+<p>覆盖索引：（减少回表的次数）</p>
+<p>如果执⾏的语句是select ID from T where k between 3 and 5，这时只需要查ID的值，⽽ID的值已经在k索引树上了，因此可 以直接提供查询结果，不需要回表。也就是说，在这个查询⾥⾯，索引k已经“覆盖了”我们的查询需求，我们称为覆盖索引。<strong>覆盖查询可以减少树的搜索次数，显著提升查询性能，是常用的性能优化手段 </strong></p>
+<p>最左前缀原则：（用于索引中定位记录）</p>
+<p><strong>B+</strong>树这种索引结构，可以利⽤索引的<strong>“</strong>最左前缀<strong>”</strong>，来定位记录。</p>
+<p>索引项是按照索引定义⾥⾯出现的字段顺序排序的。当逻辑需求是查到所有名字是“张三”的⼈时，可以快速定位到ID4，然后向后遍历得到所有需要的结果。 </p>
+<p>只要满⾜最左前缀，就可以利⽤索引来加速检索。这个最左前缀可以是联合索引的最左N 个字段，也可以是字符串索引的最左M个字符。</p>
+<p>在建立联合索引的时候，如何安排索引内的字段顺序：</p>
+<ul>
+<li>索引的复⽤能⼒。因为可以⽀持最左前缀，所以当已经有了(a,b)这个联合索引后，⼀般就不需要单独 在a上建⽴索引了。因此，第⼀原则是，如果通过调整顺序，可以少维护⼀个索引，那么这个顺序往往就是需要优先考虑采用的</li>
+</ul>
+<p>索引下推：MySQL 5.6 引⼊的索引下推优化（index condition pushdown)， 可以在索引遍历过程中，对索引中包含的字段先做判断，直接过滤掉不满⾜条件的记录，减少回表次数。 </p>
+<ol>
+<li>覆盖索引：如果查询条件使⽤的是普通索引(或是联合索引的最左原则字段),查询结果是联合索引的字段或是主键,不 ⽤回表操作,直接返回结果,减少IO磁盘读写读取正⾏数据 </li>
+<li>最左前缀：联合索引的最左 N 个字段,也可以是字符串索引的最左 M 个字符 </li>
+<li>联合索引：根据创建联合索引的顺序,以最左原则进⾏where检索,⽐如(age,name)以age=1 或 age= 1 and name=‘张 三’可以使⽤索引,单以name=‘张三’ 不会使⽤索引,考虑到存储空间的问题,还请根据业务需求,将查找频繁的数据进⾏靠左 创建索引. </li>
+<li>索引下推：like 'hello%’and age &gt;10 检索,MySQL5.6版本之前,会对匹配的数据进⾏回表查询.5.6版本后,会先过滤掉a ge&lt;10的数据,再进⾏回表查询,减少回表率,提升检索速度</li>
+</ol>
+<hr />
+<h3 id="_4">全局锁、表锁和行锁</h3>
+<p>全局锁：对整个数据库库实例进行加锁。</p>
+<p>全局锁的使用场景是做全库逻辑备份。</p>
+<p>表级锁：一种是表锁，一种是元数据锁。</p>
+              
+            </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+          <a href="https://github.com/gbb365/leetcode-node.git/" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
+      
+      
+      
+    </span>
+</div>
+    <script>var base_url = '../..';</script>
+    <script src="../../js/theme.js" defer></script>
+      <script src="../../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>

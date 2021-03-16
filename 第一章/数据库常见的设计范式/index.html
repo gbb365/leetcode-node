@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  
+  <link rel="shortcut icon" href="../../img/favicon.ico">
+  <title>数据库常见的设计范式 - My Docs</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
+
+  <link rel="stylesheet" href="../../css/theme.css" />
+  <link rel="stylesheet" href="../../css/theme_extra.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" />
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "\u6570\u636e\u5e93\u5e38\u89c1\u7684\u8bbe\u8ba1\u8303\u5f0f";
+    var mkdocs_page_input_path = "\u7b2c\u4e00\u7ae0\\\u6570\u636e\u5e93\u5e38\u89c1\u7684\u8bbe\u8ba1\u8303\u5f0f.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+        <a href="../.." class="icon icon-home"> My Docs</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="" href="../../about.md">about</a>
+                    </li>
+                </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../..">My Docs</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../..">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>数据库常见的设计范式</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        <a href="https://github.com/gbb365/leetcode-node.git/edit/master/docs/第一章/数据库常见的设计范式.md"
+          class="icon icon-github"> Edit on GitHub</a>
+      
+    </li>
+  </ul>
+  
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <blockquote>
+<p>范式是“符合某一种级别的关系模式的集合，表示一个关系内部各属性之间的联系的合理化程度”</p>
+</blockquote>
+<p>数据库范式也分为1NF，2NF，3NF，BCNF，4NF，5NF。一般在我们设计关系型数据库的时候，最多考虑到BCNF就够。符合高一级范式的设计，必定符合低一级范式，例如符合2NF的关系模式，必定符合1NF。</p>
+<p><strong>1NF的定义为：符合1NF的关系中的每个属性都不可再分。</strong>例如表中有属性“进货”，但是这个属性还可以分解为数量和单价，那就不符合第一范式。</p>
+<p><strong>1NF是所有关系型数据库的最基本要求</strong>，你在关系型数据库管理系统（RDBMS），例如SQL Server，Oracle，MySQL中创建数据表的时候，如果数据表的设计不符合这个最基本的要求，那么操作一定是不能成功的。也就是说，只要在RDBMS中已经存在的数据表，一定是符合1NF的。</p>
+<p>仅仅符合1NF会存在数据冗余过大，插入异常，删除异常，修改异常的问题。</p>
+<p><img alt="" src="https://cdn.jsdelivr.net/gh/gbb365/PicGoStorage@master/img/5b16f655b57a957bfa340d0a996a0eea_720w.jpg" /></p>
+<ul>
+<li>数据冗余：学号、姓名、系主任出现多次</li>
+<li>插入异常：新建一个系，但是如果还没有学生，就会无法将系名和系主任添加到数据表</li>
+<li>删除异常：将某个系中的所有学生都删除，整个系的信息也将丢失（学生没了，但不能说系也没了）</li>
+<li>修改异常：某学生转系，为了保证数据库数据的一致性，需要修改多条记录中系与系主任的数据。</li>
+</ul>
+<p><strong>第二范式（2NF)：在1NF的基础上，消除了非主属性对码的部分函数依赖。</strong></p>
+<ul>
+<li>函数依赖：若在一张表中，在属性（或属性组）X的值确定的情况下，必定能确定属性Y的值，那么就可以说Y函数依赖于X，写作 X → Y。例如上表中，找不到任何一条记录，他们的学号相同而名字相同，因此姓名依赖于学号，写作 学号-&gt;姓名。其他的有，系名-&gt;系主任，学号-&gt;系主任，（学号，课名）-&gt;分数</li>
+<li>完全函数依赖：在一张表中，若 X → Y，且对于 X 的任何一个真子集（假如属性组 X 包含超过一个属性的话），X ' → Y 不成立，那么我们称 Y 对于 X <strong>完全函数依赖</strong>，记作 X F→ Y。例如学号F-&gt;姓名，（学号，课名）F-&gt;分数</li>
+<li>部分函数依赖：假如 Y 函数依赖于 X，但同时 Y 并不完全函数依赖于 X，那么我们就称 Y 部分函数依赖于 X，记作 X P→ Y。例如，（学号，课名）P-&gt;姓名，姓名可以由（学号，课名）唯一决定，但是姓名也可以仅仅由学号决定。</li>
+<li>传递函数依赖：『Y 不包含于 X，且 X 不函数依赖于 Y』这个前提），假如 Z 函数依赖于 Y，且 Y 函数依赖于 X，就称 Z 传递函数依赖于 X ，记作 X T→ Z</li>
+<li>码：设K为某表中的一个属性或者属性组，若除K之外的所有属性都<strong>完全函数依赖</strong>于K，就称k为候选码，简称码。（假设当k确定的情况下，该表中除k之外的所有属性也就随之确定，那么k就是码）一个表中可以超过一个码。上表的（学号，课名）就是这个属性组的码。</li>
+<li>非主属性：包含在任何一个码中的属性成为主属性，其余的都成为非主属性。对于上面的表，主属性有两个，就是学号与课名。</li>
+</ul>
+<p>判断是否满足2NF的要求：</p>
+<ul>
+<li>找到数据表中所有的码。（一个一个找，接着组合找，如果A是码，那么包含A的属性组AB,ABC等都不是了，因为码的要求是完全函数依赖）</li>
+<li>根据第一步所得到的码，找出所有的<strong>主属性</strong>。</li>
+<li>数据表中，除去所有的主属性，剩下的就都是<strong>非主属性</strong>了。</li>
+<li>查看是否存在非主属性对码的<strong>部分函数依赖</strong>。</li>
+</ul>
+<p>上表中的所有的函数依赖关系：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/gbb365/PicGoStorage@master/img/image-20201210113500081.png" alt="image-20201210113500081" style="zoom: 33%;" /></p>
+<p>可以看到，对于（学号，课名）-&gt;姓名，有学号-&gt;姓名，存在非主属性姓名对码（学号，课名)的部分函数依赖，因此不满足第二范式。</p>
+<p>消除部门函数依赖只有一个办法，将大数据表拆分成两个或者更多的更小的数据表。</p>
+<p>选课（学号，课名，分数）
+学生（学号，姓名，系名，系主任）</p>
+<p>对于选课表，码是（学号，课名），主属性是<strong>学号</strong>和<strong>课名</strong>，非主属性是<strong>分数</strong>，<strong>学号</strong>确定，并不能唯一确定<strong>分数</strong>，<strong>课名</strong>确定，也不能唯一确定<strong>分数</strong>，所以不存在非主属性<strong>分数</strong>对于码 <strong>（学号，课名）</strong>的部分函数依赖，所以此表符合2NF的要求。</p>
+<p>对于学生表，码是学号，主属性是学号，非主属性是姓名、系主任和系名，因为码只有一个属性，所以不可能存在非主属性对码的部分函数依赖。符合2NF</p>
+<p><img src="https://cdn.jsdelivr.net/gh/gbb365/PicGoStorage@master/img/image-20201210114433720.png" alt="image-20201210114433720" style="zoom:33%;" /></p>
+<p>模式分解后更新的数据：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/gbb365/PicGoStorage@master/img/image-20201210114629069.png" alt="image-20201210114629069" style="zoom:33%;" /></p>
+<ol>
+<li>删除某个系中所有的学生记录
+   该系的信息仍然全部丢失。——无改进</li>
+<li>插入一个尚无学生的新系的信息。
+   因为学生表的码是学号，不能为空，所以此操作不被允许。——无改进</li>
+</ol>
+<p>仍然存在非主属性系主任对于码学号的传递函数依赖，应该改进为3NF</p>
+<p><strong>第三范式（3NF）</strong> <strong>3NF在2NF的基础之上，消除了非主属性对于码的传递函数依赖</strong>。也就是说， 如果存在非主属性对于码的传递函数依赖，则不符合3NF的要求。</p>
+<p>对于<strong>选课</strong>表，主码为（学号，课名），主属性为<strong>学号</strong>和<strong>课名，</strong>非主属性只有一个，为分数，不可能存在传递函数依赖，所以<strong>选课</strong>表的设计，符合3NF的要求。</p>
+<p>对于<strong>学生</strong>表，主码为<strong>学号</strong>，主属性为<strong>学号</strong>，非主属性为<strong>姓名</strong>、<strong>系名</strong>和<strong>系主任</strong>。因为 学号 → 系名，同时 系名 → 系主任，所以存在非主属性<strong>系主任</strong>对于码<strong>学号</strong>的传递函数依赖，所以<strong>学生</strong>表的设计，不符合3NF的要求。。</p>
+<p>为了让数据表设计达到3NF，我们必须进一步进行模式分解为以下形式：
+选课（学号，课名，分数）
+学生（学号，姓名，系名）
+系（系名，系主任）</p>
+<p>对于<strong>学生</strong>表，码为<strong>学号</strong>，主属性为<strong>学号</strong>，非主属性为<strong>系名</strong>，不可能存在非主属性对于码的传递函数依赖，所以符合3NF的要求。</p>
+<p>对于<strong>系</strong>表，码为<strong>系名</strong>，主属性为<strong>系名</strong>，非主属性为<strong>系主任</strong>，不可能存在非主属性对于码的传递函数依赖（至少要有三个属性才可能存在传递函数依赖关系），所以符合3NF的要求。。</p>
+<p><img src="C:\Users\86135\AppData\Roaming\Typora\typora-user-images\image-20201210115028489.png" alt="image-20201210115028489" style="zoom:33%;" /></p>
+<ol>
+<li>删除某个系中所有的学生记录
+   该系的信息不会丢失。——有改进</li>
+<li>插入一个尚无学生的新系的信息。
+   因为系表与学生表目前是独立的两张表，所以不影响。——有改进</li>
+<li>数据冗余更加少了。——有改进</li>
+</ol>
+<p>符合3NF要求的数据库设计，<strong>基本</strong>上解决了数据冗余过大，插入异常，修改异常，删除异常的问题</p>
+              
+            </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+          <a href="https://github.com/gbb365/leetcode-node.git/" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
+      
+      
+      
+    </span>
+</div>
+    <script>var base_url = '../..';</script>
+    <script src="../../js/theme.js" defer></script>
+      <script src="../../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>
