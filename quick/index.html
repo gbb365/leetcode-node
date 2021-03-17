@@ -7,14 +7,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
   
+  
   <link rel="shortcut icon" href="../img/favicon.ico">
   <title>328. Odd Even Linked List - LeetCode刷题笔记</title>
-  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
-  <link href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
 
-  <link rel="stylesheet" href="../css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../css/theme_extra.css" type="text/css" />
-  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+  <link rel="stylesheet" href="../css/theme.css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" />
   
   <script>
     // Current page data
@@ -25,7 +25,7 @@
   
   <script src="../js/jquery-2.1.1.min.js" defer></script>
   <script src="../js/modernizr-2.8.3.min.js" defer></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
   <script>hljs.initHighlightingOnLoad();</script> 
   
 </head>
@@ -36,6 +36,7 @@
 
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
       <div class="wy-side-nav-search">
         <a href=".." class="icon icon-home"> LeetCode刷题笔记</a>
         <div role="search">
@@ -46,159 +47,50 @@
       </div>
 
       <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-	<ul class="tocbase current">
-    
-    
-      
-
-
-  <li class="navtree toctree-l1 inactive">
-    <a class="" href="..">HOME</a>
-  </li>
-    
-      
-  <li class="navtree toctree-l1 label">
-    <p class="caption">链表</p>
-  </li>
-
-
-  
-
-  
-    <li class="navtree toctree-l1 group">
-      <ul class="navtree subnav-l1 current">
-          
-
-
-  <li class="navtree toctree-l2 inactive">
-    <a class="" href="../reverse/">328. Odd Even Linked List</a>
-  </li>
-        
-          
-
-
-  <li class="navtree toctree-l2 inactive">
-    <a class="" href="../sort/">Sort</a>
-  </li>
-        
-          
-
-
-  <li class="navtree toctree-l2 inactive">
-    <a class="" href="../test/">test</a>
-  </li>
-        
-      </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="..">HOME</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">链表</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../reverse/">fucking</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../sort/">Sort</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../test/">test</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../TreeMap%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">TreeMap学习笔记</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">排序</span></p>
+                <ul class="current">
+                    <li class="toctree-l1"><a class="reference internal" href="../insert/">Insert</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../bubble/">328. Odd Even Linked List</a>
+                    </li>
+                    <li class="toctree-l1 current"><a class="reference internal current" href="./">328. Odd Even Linked List</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#_1">题目描述和难度</a>
     </li>
-    
-      
-  <li class="navtree toctree-l1 label">
-    <p class="caption">排序</p>
-  </li>
-
-
-  
-
-  
-    <li class="navtree toctree-l1 group">
-      <ul class="navtree subnav-l1 current">
-          
-
-
-  <li class="navtree toctree-l2 inactive">
-    <a class="" href="../insert/">Insert</a>
-  </li>
-        
-          
-
-
-  <li class="navtree toctree-l2 inactive">
-    <a class="" href="../bubble/">328. Odd Even Linked List</a>
-  </li>
-        
-          
-
-
-  
-    
-    <li class="navtree toctree-l2 page current">
-      <a class="current" href="./">
-        328. Odd Even Linked List
-          <span class="toctree-expand"></span>
-      </a>
+    <li class="toctree-l2"><a class="reference internal" href="#_2">思路分析</a>
     </li>
-    
-      
-
-
-
-  <li class="toctree-l2 current">
-    <ul class="subnav-l2 current">
-    
-      
-        <li class="toctree-l3">
-          <a class="toctree-l4" href="#_1">题目描述和难度</a>
-        </li>
-    
-      
-        <li class="toctree-l3">
-          <a class="toctree-l4" href="#_2">思路分析</a>
-        </li>
-    
-      
-          
-
-  <li class="toctree-l3">
-    <a href="#_3">
-      参考解答
-      <span class="toctree-expand"></span>
-    </a>
-  </li>
-
-
-
-  <li class="toctree-l3">
-    <ul class="subnav-l3 toc-hidden">
-    
-      
-        <li class="toctree-l4">
-          <a class="toctree-l5" href="#1">参考解答1</a>
-        </li>
-    
-      
-        <li class="toctree-l4">
-          <a class="toctree-l5" href="#2">参考解答2（推荐）</a>
-        </li>
-    
-      
-        <li class="toctree-l4">
-          <a class="toctree-l5" href="#2_1">参考解答2（推荐）</a>
-        </li>
-    
+    <li class="toctree-l2"><a class="reference internal" href="#_3">参考解答</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#1">参考解答1</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#2">参考解答2（推荐）</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#2_1">参考解答2（推荐）</a>
+    </li>
+        </ul>
+    </li>
     </ul>
-  </li>
-
-      
-    
-    </ul>
-  </li>
-
-
-  
-        
-          
-
-
-  <li class="navtree toctree-l2 inactive">
-    <a class="" href="../sort%20-%20%E5%89%AF%E6%9C%AC/">34. reverseList</a>
-  </li>
-        
-      </ul>
-    </li>
-    
-  </ul>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../sort%20-%20%E5%89%AF%E6%9C%AC/">34. reverseList</a>
+                    </li>
+                </ul>
       </div>
-      &nbsp;
+    </div>
     </nav>
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
@@ -230,24 +122,27 @@
       
     </li>
   </ul>
+  
   <hr/>
 </div>
           <div role="main">
             <div class="section">
               
-                <h1 id="328-odd-even-linked-list">328. Odd Even Linked List</h1>
-<h2 id="_1">题目描述和难度</h2>
+                <h1 id="328-odd-even-linked-list">328. Odd Even Linked List<a class="headerlink" href="#328-odd-even-linked-list" title="Permanent link">&para;</a></h1>
+<h2 id="_1">题目描述和难度<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <ul>
 <li>题目描述：</li>
 </ul>
 <p>给定一个单链表，把所有的奇数节点和偶数节点分别排在一起。请注意，这里的奇数节点和偶数节点指的是节点编号的奇偶性，而不是节点的值的奇偶性。</p>
 <p>请尝试使用原地算法完成。你的算法的空间复杂度应为 O(1)，时间复杂度应为 O(nodes)，nodes 为节点总数。</p>
 <p><strong>示例 1:</strong></p>
-<p><code>输入: 1-&gt;2-&gt;3-&gt;4-&gt;5-&gt;NULL
-  输出: 1-&gt;3-&gt;5-&gt;2-&gt;4-&gt;NULL</code></p>
+<div class="highlight"><pre><span></span><code>输入: 1-&gt;2-&gt;3-&gt;4-&gt;5-&gt;NULL
+输出: 1-&gt;3-&gt;5-&gt;2-&gt;4-&gt;NULL
+</code></pre></div>
 <p><strong>示例 2:</strong></p>
-<p><code>输入: 2-&gt;1-&gt;3-&gt;5-&gt;6-&gt;4-&gt;7-&gt;NULL 
-  输出: 2-&gt;3-&gt;6-&gt;7-&gt;1-&gt;5-&gt;4-&gt;NULL</code></p>
+<div class="highlight"><pre><span></span><code>输入: 2-&gt;1-&gt;3-&gt;5-&gt;6-&gt;4-&gt;7-&gt;NULL 
+输出: 2-&gt;3-&gt;6-&gt;7-&gt;1-&gt;5-&gt;4-&gt;NULL
+</code></pre></div>
 <p><strong>说明:</strong></p>
 <ul>
 <li>应当保持奇数节点和偶数节点的相对顺序。</li>
@@ -264,16 +159,16 @@
 <p>中文网址：<a href="https://leetcode-cn.com/problems/odd-even-linked-list/description/">328. 奇偶链表</a> 。</p>
 </li>
 </ul>
-<h2 id="_2">思路分析</h2>
-<p>求解关键：给定一个单链表，把所有的奇数节点和偶数节点分别排在一起。请注意，这里的奇数节点和偶数节点指的是节点编号的奇偶性，而不是节点的值的奇偶性。请尝试使用<strong>原地算法</strong>完成。你的算法的空间复杂度应为 O(1)，时间复杂度应为 O(nodes)，nodes为节点总数。题目要求<strong>原地算法</strong>完成，那么就一定得“穿针引线”了。</p>
+<h2 id="_2">思路分析<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<p>求解关键：给定一个单链表，把所有的奇数节点和偶数节点分别排在一起。请注意，这里的奇数节点和偶数节点指的是节点编号的奇偶性，而不是节点的值的奇偶性。请尝试使用**原地算法**完成。你的算法的空间复杂度应为 O(1)，时间复杂度应为 O(nodes)，nodes为节点总数。题目要求**原地算法**完成，那么就一定得“穿针引线”了。</p>
 <ul>
 <li>思路1：可以使用 <a href="https://liweiwei1419.github.io/leetcode-solution/leetcode-0086-partition-list/">LeetCode 第 86 题题解思路 2 </a>完成。</li>
 <li>思路2：同样使用两个指针，一次跳过一个节点完成“穿针引线”，特别注意要一些边界情况的判断。</li>
 </ul>
-<h2 id="_3">参考解答</h2>
-<h3 id="1">参考解答1</h3>
+<h2 id="_3">参考解答<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<h3 id="1">参考解答1<a class="headerlink" href="#1" title="Permanent link">&para;</a></h3>
 <p>Java 写法：</p>
-<pre><code>class ListNode {
+<div class="highlight"><pre><span></span><code>class ListNode {
     int val;
     ListNode next;
 
@@ -338,14 +233,14 @@ public class Solution {
         System.out.println(oddEvenList);
     }
 }
-</code></pre>
-<h3 id="2">参考解答2（推荐）</h3>
+</code></pre></div>
+<h3 id="2">参考解答2（推荐）<a class="headerlink" href="#2" title="Permanent link">&para;</a></h3>
 <ul>
 <li>注意1：我们采用一次跳过一个节点“穿针引线”的办法来完成这个问题；</li>
 <li>注意2：在 <code>while</code> 循环体中，如果结点个数是奇数的话，偶数索引的最后一个元素的 <code>next</code> 指针会指向一个 <code>null</code> （因为跳过一个结点改变 <code>next</code> 指针的操作是一起进行的），这一点完全可以分类讨论，因为就两种情况，如下图所示：</li>
 </ul>
 <p><img alt="img" src="https://liweiwei1419.github.io/images/leetcode-solution/328-1.jpg" /></p>
-<pre><code>public class Solution2 {
+<div class="highlight"><pre><span></span><code>public class Solution2 {
 
     public ListNode oddEvenList(ListNode head) {
         if (head == null || head.next == null) {
@@ -368,14 +263,14 @@ public class Solution {
         return oddHead;
     }
 }
-</code></pre>
-<h3 id="2_1">参考解答2（推荐）</h3>
+</code></pre></div>
+<h3 id="2_1">参考解答2（推荐）<a class="headerlink" href="#2_1" title="Permanent link">&para;</a></h3>
 <ul>
 <li>注意1：我们采用一次跳过一个节点“穿针引线”的办法来完成这个问题；</li>
 <li>注意2：在 <code>while</code> 循环体中，如果结点个数是奇数的话，偶数索引的最后一个元素的 <code>next</code> 指针会指向一个 <code>null</code> （因为跳过一个结点改变 <code>next</code> 指针的操作是一起进行的），这一点完全可以分类讨论，因为就两种情况，如下图所示：</li>
 </ul>
 <p><img alt="img" src="https://liweiwei1419.github.io/images/leetcode-solution/328-1.jpg" /></p>
-<pre><code>public class Solution2 {
+<div class="highlight"><pre><span></span><code>public class Solution2 {
 
     public ListNode oddEvenList(ListNode head) {
         if (head == null || head.next == null) {
@@ -398,9 +293,9 @@ public class Solution {
         return oddHead;
     }
 }
-</code></pre>
+</code></pre></div>
 <p>Python 写法：</p>
-<pre><code># Definition for singly-linked list.
+<div class="highlight"><pre><span></span><code># Definition for singly-linked list.
 class ListNode(object):
     def __init__(self, x):
         self.val = x
@@ -433,11 +328,11 @@ class Solution:
 
         odd_cur.next = even_head
         return odd_head
-</code></pre>
+</code></pre></div>
 <p>思路概述：</p>
 <p>在遍历的过程中，标记奇数节点和偶数节点，把奇数节点和偶数节点分开。最后把奇数节点的最后一个节点指向偶数节点的开始节点，具体细节请见代码。</p>
 <p>我的解答：</p>
-<pre><code>class ListNode {
+<div class="highlight"><pre><span></span><code>class ListNode {
     int val;
     ListNode next;
 
@@ -524,9 +419,9 @@ public class Solution {
         System.out.printf(&quot;null&quot;);
     }
 }
-</code></pre>
-<p>网友的解答：http://blog.csdn.net/guicaisa/article/details/50557475 显然，网友的解法会更简洁一些： 根据网友的解答自己写了一遍：</p>
-<pre><code>public class Solution2 {
+</code></pre></div>
+<p>网友的解答：<a href="http://blog.csdn.net/guicaisa/article/details/50557475">http://blog.csdn.net/guicaisa/article/details/50557475</a> 显然，网友的解法会更简洁一些： 根据网友的解答自己写了一遍：</p>
+<div class="highlight"><pre><span></span><code>public class Solution2 {
 
     public ListNode oddEvenList(ListNode head) {
         if (head == null) {
@@ -590,8 +485,8 @@ public class Solution {
         System.out.printf(&quot;null&quot;);
     }
 }
-</code></pre>
-<p>本篇文章的地址为 https://liweiwei1419.github.io/leetcode-solution/leetcode-0328-odd-even-linked-list ，如果我的题解有错误，或者您有更好的解法，欢迎您告诉我 <a href="https://liweiwei1419.github.io/leetcode-solution/leetcode-0328-odd-even-linked-list/liweiwei1419@gmail.com">liweiwei1419@gmail.com</a></p>
+</code></pre></div>
+<p>本篇文章的地址为 <a href="https://liweiwei1419.github.io/leetcode-solution/leetcode-0328-odd-even-linked-list">https://liweiwei1419.github.io/leetcode-solution/leetcode-0328-odd-even-linked-list</a> ，如果我的题解有错误，或者您有更好的解法，欢迎您告诉我 <a href="https://liweiwei1419.github.io/leetcode-solution/leetcode-0328-odd-even-linked-list/liweiwei1419@gmail.com">liweiwei1419@gmail.com</a></p>
               
             </div>
           </div>
@@ -614,7 +509,7 @@ public class Solution {
     
   </div>
 
-  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
 </footer>
       
         </div>
@@ -624,7 +519,7 @@ public class Solution {
 
   </div>
 
-  <div class="rst-versions" role="note" style="cursor: pointer">
+  <div class="rst-versions" role="note" aria-label="versions">
     <span class="rst-current-version" data-toggle="rst-current-version">
       
           <a href="https://github.com/gbb365/leetcode-node.git/" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
@@ -640,6 +535,11 @@ public class Solution {
     <script>var base_url = '..';</script>
     <script src="../js/theme.js" defer></script>
       <script src="../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
 
 </body>
 </html>
