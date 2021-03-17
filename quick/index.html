@@ -273,7 +273,7 @@
 <h2 id="_3">参考解答</h2>
 <h3 id="1">参考解答1</h3>
 <p>Java 写法：</p>
-<div class="codehilite"><pre><span></span><code>class ListNode {
+<pre><code>class ListNode {
     int val;
     ListNode next;
 
@@ -338,15 +338,14 @@ public class Solution {
         System.out.println(oddEvenList);
     }
 }
-</code></pre></div>
-
+</code></pre>
 <h3 id="2">参考解答2（推荐）</h3>
 <ul>
 <li>注意1：我们采用一次跳过一个节点“穿针引线”的办法来完成这个问题；</li>
 <li>注意2：在 <code>while</code> 循环体中，如果结点个数是奇数的话，偶数索引的最后一个元素的 <code>next</code> 指针会指向一个 <code>null</code> （因为跳过一个结点改变 <code>next</code> 指针的操作是一起进行的），这一点完全可以分类讨论，因为就两种情况，如下图所示：</li>
 </ul>
 <p><img alt="img" src="https://liweiwei1419.github.io/images/leetcode-solution/328-1.jpg" /></p>
-<div class="codehilite"><pre><span></span><code>public class Solution2 {
+<pre><code>public class Solution2 {
 
     public ListNode oddEvenList(ListNode head) {
         if (head == null || head.next == null) {
@@ -369,15 +368,14 @@ public class Solution {
         return oddHead;
     }
 }
-</code></pre></div>
-
+</code></pre>
 <h3 id="2_1">参考解答2（推荐）</h3>
 <ul>
 <li>注意1：我们采用一次跳过一个节点“穿针引线”的办法来完成这个问题；</li>
 <li>注意2：在 <code>while</code> 循环体中，如果结点个数是奇数的话，偶数索引的最后一个元素的 <code>next</code> 指针会指向一个 <code>null</code> （因为跳过一个结点改变 <code>next</code> 指针的操作是一起进行的），这一点完全可以分类讨论，因为就两种情况，如下图所示：</li>
 </ul>
 <p><img alt="img" src="https://liweiwei1419.github.io/images/leetcode-solution/328-1.jpg" /></p>
-<div class="codehilite"><pre><span></span><code>public class Solution2 {
+<pre><code>public class Solution2 {
 
     public ListNode oddEvenList(ListNode head) {
         if (head == null || head.next == null) {
@@ -400,10 +398,9 @@ public class Solution {
         return oddHead;
     }
 }
-</code></pre></div>
-
+</code></pre>
 <p>Python 写法：</p>
-<div class="codehilite"><pre><span></span><code># Definition for singly-linked list.
+<pre><code># Definition for singly-linked list.
 class ListNode(object):
     def __init__(self, x):
         self.val = x
@@ -436,12 +433,11 @@ class Solution:
 
         odd_cur.next = even_head
         return odd_head
-</code></pre></div>
-
+</code></pre>
 <p>思路概述：</p>
 <p>在遍历的过程中，标记奇数节点和偶数节点，把奇数节点和偶数节点分开。最后把奇数节点的最后一个节点指向偶数节点的开始节点，具体细节请见代码。</p>
 <p>我的解答：</p>
-<div class="codehilite"><pre><span></span><code>class ListNode {
+<pre><code>class ListNode {
     int val;
     ListNode next;
 
@@ -528,10 +524,9 @@ public class Solution {
         System.out.printf(&quot;null&quot;);
     }
 }
-</code></pre></div>
-
+</code></pre>
 <p>网友的解答：http://blog.csdn.net/guicaisa/article/details/50557475 显然，网友的解法会更简洁一些： 根据网友的解答自己写了一遍：</p>
-<div class="codehilite"><pre><span></span><code>public class Solution2 {
+<pre><code>public class Solution2 {
 
     public ListNode oddEvenList(ListNode head) {
         if (head == null) {
@@ -595,8 +590,7 @@ public class Solution {
         System.out.printf(&quot;null&quot;);
     }
 }
-</code></pre></div>
-
+</code></pre>
 <p>本篇文章的地址为 https://liweiwei1419.github.io/leetcode-solution/leetcode-0328-odd-even-linked-list ，如果我的题解有错误，或者您有更好的解法，欢迎您告诉我 <a href="https://liweiwei1419.github.io/leetcode-solution/leetcode-0328-odd-even-linked-list/liweiwei1419@gmail.com">liweiwei1419@gmail.com</a></p>
               
             </div>

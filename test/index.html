@@ -185,48 +185,48 @@
             <div class="section">
               
                 <h1 id="test">test</h1>
-<div class="codehilite"><pre><span></span><code><span class="kd">class</span> <span class="nc">ListNode</span> <span class="p">{</span>
-    <span class="kt">int</span> <span class="n">val</span><span class="p">;</span>
-    <span class="n">ListNode</span> <span class="n">next</span><span class="p">;</span>
+<pre><code class="language-java">class ListNode {
+    int val;
+    ListNode next;
 
-    <span class="n">ListNode</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">val</span> <span class="o">=</span> <span class="n">x</span><span class="p">;</span>
-    <span class="p">}</span>
-<span class="p">}</span>
+    ListNode(int x) {
+        val = x;
+    }
+}
 
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+public class Solution {
 
-    <span class="kd">public</span> <span class="n">ListNode</span> <span class="nf">oddEvenList</span><span class="p">(</span><span class="n">ListNode</span> <span class="n">head</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">if</span> <span class="p">(</span><span class="n">head</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">||</span> <span class="n">head</span><span class="p">.</span><span class="na">next</span> <span class="o">==</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
-            <span class="k">return</span> <span class="n">head</span><span class="p">;</span>
-        <span class="p">}</span>
-        <span class="n">ListNode</span> <span class="n">oddHead</span> <span class="o">=</span> <span class="n">head</span><span class="p">;</span>
-        <span class="n">ListNode</span> <span class="n">evenHead</span> <span class="o">=</span> <span class="n">oddHead</span><span class="p">.</span><span class="na">next</span><span class="p">;</span>
-        <span class="n">ListNode</span> <span class="n">oddNode</span> <span class="o">=</span> <span class="n">oddHead</span><span class="p">;</span>
-        <span class="n">ListNode</span> <span class="n">evenNode</span> <span class="o">=</span> <span class="n">evenHead</span><span class="p">;</span>
-        <span class="n">ListNode</span> <span class="n">currentNode</span> <span class="o">=</span> <span class="n">evenHead</span><span class="p">.</span><span class="na">next</span><span class="p">;</span>
-        <span class="kt">boolean</span> <span class="n">isodd</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
-        <span class="k">while</span> <span class="p">(</span><span class="n">currentNode</span> <span class="o">!=</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
-            <span class="k">if</span> <span class="p">(</span><span class="n">isodd</span><span class="p">)</span> <span class="p">{</span>
-                <span class="n">oddNode</span><span class="p">.</span><span class="na">next</span> <span class="o">=</span> <span class="n">currentNode</span><span class="p">;</span>
-                <span class="n">oddNode</span> <span class="o">=</span> <span class="n">currentNode</span><span class="p">;</span>
-            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-                <span class="n">evenNode</span><span class="p">.</span><span class="na">next</span> <span class="o">=</span> <span class="n">currentNode</span><span class="p">;</span>
-                <span class="n">evenNode</span> <span class="o">=</span> <span class="n">currentNode</span><span class="p">;</span>
-            <span class="p">}</span>
-            <span class="n">isodd</span> <span class="o">=</span> <span class="o">!</span><span class="n">isodd</span><span class="p">;</span>
-            <span class="n">currentNode</span> <span class="o">=</span> <span class="n">currentNode</span><span class="p">.</span><span class="na">next</span><span class="p">;</span>
-        <span class="p">}</span>
-        <span class="n">isodd</span> <span class="o">=</span> <span class="o">!</span><span class="n">isodd</span><span class="p">;</span>
-        <span class="k">if</span> <span class="p">(</span><span class="n">isodd</span><span class="p">)</span> <span class="p">{</span>
-            <span class="n">oddNode</span><span class="p">.</span><span class="na">next</span> <span class="o">=</span> <span class="n">evenHead</span><span class="p">;</span>
-            <span class="n">evenNode</span><span class="p">.</span><span class="na">next</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
-        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-            <span class="n">oddNode</span><span class="p">.</span><span class="na">next</span> <span class="o">=</span> <span class="n">evenHead</span><span class="p">;</span>
-        <span class="p">}</span>
-        <span class="k">return</span> <span class="n">oddHead</span><span class="p">;</span>
-    <span class="p">}</span>
-</code></pre></div>
+    public ListNode oddEvenList(ListNode head) {
+        if (head == null || head.next == null) {
+            return head;
+        }
+        ListNode oddHead = head;
+        ListNode evenHead = oddHead.next;
+        ListNode oddNode = oddHead;
+        ListNode evenNode = evenHead;
+        ListNode currentNode = evenHead.next;
+        boolean isodd = true;
+        while (currentNode != null) {
+            if (isodd) {
+                oddNode.next = currentNode;
+                oddNode = currentNode;
+            } else {
+                evenNode.next = currentNode;
+                evenNode = currentNode;
+            }
+            isodd = !isodd;
+            currentNode = currentNode.next;
+        }
+        isodd = !isodd;
+        if (isodd) {
+            oddNode.next = evenHead;
+            evenNode.next = null;
+        } else {
+            oddNode.next = evenHead;
+        }
+        return oddHead;
+    }
+</code></pre>
               
             </div>
           </div>

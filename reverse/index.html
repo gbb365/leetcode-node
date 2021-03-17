@@ -277,330 +277,328 @@
 <h2 id="_3">参考解答</h2>
 <h3 id="1">参考解答1</h3>
 <p>Java 写法：</p>
-<div class="codehilite"><pre><span></span><code><span class="kd">class</span> <span class="nc">ListNode</span> <span class="p">{</span>
-    <span class="kt">int</span> <span class="n">val</span><span class="p">;</span>
-    <span class="n">ListNode</span> <span class="n">next</span><span class="p">;</span>
+<pre><code class="language-java">
+class ListNode {
+    int val;
+    ListNode next;
 
-    <span class="n">ListNode</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">val</span> <span class="o">=</span> <span class="n">x</span><span class="p">;</span>
-    <span class="p">}</span>
+    ListNode(int x) {
+        val = x;
+    }
 
-    <span class="kd">public</span> <span class="nf">ListNode</span><span class="p">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">if</span> <span class="p">(</span><span class="n">nums</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">||</span> <span class="n">nums</span><span class="p">.</span><span class="na">length</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
-            <span class="k">throw</span> <span class="k">new</span> <span class="n">IllegalArgumentException</span><span class="p">(</span><span class="s">&quot;arr can not be empty&quot;</span><span class="p">);</span>
-        <span class="p">}</span>
-        <span class="k">this</span><span class="p">.</span><span class="na">val</span> <span class="o">=</span> <span class="n">nums</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span><span class="p">;</span>
-        <span class="n">ListNode</span> <span class="n">curr</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span>
-        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">nums</span><span class="p">.</span><span class="na">length</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-            <span class="n">curr</span><span class="p">.</span><span class="na">next</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ListNode</span><span class="p">(</span><span class="n">nums</span><span class="o">[</span><span class="n">i</span><span class="o">]</span><span class="p">);</span>
-            <span class="n">curr</span> <span class="o">=</span> <span class="n">curr</span><span class="p">.</span><span class="na">next</span><span class="p">;</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
+    public ListNode(int[] nums) {
+        if (nums == null || nums.length == 0) {
+            throw new IllegalArgumentException(&quot;arr can not be empty&quot;);
+        }
+        this.val = nums[0];
+        ListNode curr = this;
+        for (int i = 1; i &lt; nums.length; i++) {
+            curr.next = new ListNode(nums[i]);
+            curr = curr.next;
+        }
+    }
 
-    <span class="nd">@Override</span>
-    <span class="kd">public</span> <span class="n">String</span> <span class="nf">toString</span><span class="p">()</span> <span class="p">{</span>
-        <span class="n">StringBuilder</span> <span class="n">s</span> <span class="o">=</span> <span class="k">new</span> <span class="n">StringBuilder</span><span class="p">();</span>
-        <span class="n">ListNode</span> <span class="n">cur</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span>
-        <span class="k">while</span> <span class="p">(</span><span class="n">cur</span> <span class="o">!=</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
-            <span class="n">s</span><span class="p">.</span><span class="na">append</span><span class="p">(</span><span class="n">cur</span><span class="p">.</span><span class="na">val</span> <span class="o">+</span> <span class="s">&quot; -&gt; &quot;</span><span class="p">);</span>
-            <span class="n">cur</span> <span class="o">=</span> <span class="n">cur</span><span class="p">.</span><span class="na">next</span><span class="p">;</span>
-        <span class="p">}</span>
-        <span class="n">s</span><span class="p">.</span><span class="na">append</span><span class="p">(</span><span class="s">&quot;NULL&quot;</span><span class="p">);</span>
-        <span class="k">return</span> <span class="n">s</span><span class="p">.</span><span class="na">toString</span><span class="p">();</span>
-    <span class="p">}</span>
-<span class="p">}</span>
+    @Override
+    public String toString() {
+        StringBuilder s = new StringBuilder();
+        ListNode cur = this;
+        while (cur != null) {
+            s.append(cur.val + &quot; -&gt; &quot;);
+            cur = cur.next;
+        }
+        s.append(&quot;NULL&quot;);
+        return s.toString();
+    }
+}
 
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Solution</span> <span class="p">{</span>
-    <span class="kd">public</span> <span class="n">ListNode</span> <span class="nf">oddEvenList</span><span class="p">(</span><span class="n">ListNode</span> <span class="n">head</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">ListNode</span> <span class="n">dummyNodeOdd</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ListNode</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>
-        <span class="n">ListNode</span> <span class="n">dummyNodeEven</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ListNode</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>
-        <span class="n">ListNode</span> <span class="n">curOdd</span> <span class="o">=</span> <span class="n">dummyNodeOdd</span><span class="p">;</span>
-        <span class="n">ListNode</span> <span class="n">curEven</span> <span class="o">=</span> <span class="n">dummyNodeEven</span><span class="p">;</span>
-        <span class="kt">int</span> <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-        <span class="k">while</span> <span class="p">(</span><span class="n">head</span> <span class="o">!=</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
-            <span class="k">if</span> <span class="p">(</span><span class="n">count</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
-                <span class="n">curOdd</span><span class="p">.</span><span class="na">next</span> <span class="o">=</span> <span class="n">head</span><span class="p">;</span>
-                <span class="n">curOdd</span> <span class="o">=</span> <span class="n">curOdd</span><span class="p">.</span><span class="na">next</span><span class="p">;</span>
-            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-                <span class="n">curEven</span><span class="p">.</span><span class="na">next</span> <span class="o">=</span> <span class="n">head</span><span class="p">;</span>
-                <span class="n">curEven</span> <span class="o">=</span> <span class="n">curEven</span><span class="p">.</span><span class="na">next</span><span class="p">;</span>
-            <span class="p">}</span>
-            <span class="n">head</span> <span class="o">=</span> <span class="n">head</span><span class="p">.</span><span class="na">next</span><span class="p">;</span>
-            <span class="n">count</span><span class="o">++</span><span class="p">;</span>
-        <span class="p">}</span>
-        <span class="n">curOdd</span><span class="p">.</span><span class="na">next</span> <span class="o">=</span> <span class="n">dummyNodeEven</span><span class="p">.</span><span class="na">next</span><span class="p">;</span>
-        <span class="c1">// 特别注意：最后这一步不能忘记，否则会产生一个循环链表</span>
-        <span class="n">curEven</span><span class="p">.</span><span class="na">next</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
-        <span class="k">return</span> <span class="n">dummyNodeOdd</span><span class="p">.</span><span class="na">next</span><span class="p">;</span>
-    <span class="p">}</span>
+public class Solution {
+    public ListNode oddEvenList(ListNode head) {
+        ListNode dummyNodeOdd = new ListNode(-1);
+        ListNode dummyNodeEven = new ListNode(-1);
+        ListNode curOdd = dummyNodeOdd;
+        ListNode curEven = dummyNodeEven;
+        int count = 0;
+        while (head != null) {
+            if (count % 2 == 0) {
+                curOdd.next = head;
+                curOdd = curOdd.next;
+            } else {
+                curEven.next = head;
+                curEven = curEven.next;
+            }
+            head = head.next;
+            count++;
+        }
+        curOdd.next = dummyNodeEven.next;
+        // 特别注意：最后这一步不能忘记，否则会产生一个循环链表
+        curEven.next = null;
+        return dummyNodeOdd.next;
+    }
 
-    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="p">)</span> <span class="p">{</span>
-        <span class="kt">int</span><span class="o">[]</span> <span class="n">nums</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">};</span>
-        <span class="n">ListNode</span> <span class="n">head</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ListNode</span><span class="p">(</span><span class="n">nums</span><span class="p">);</span>
-        <span class="n">Solution</span> <span class="n">solution</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Solution</span><span class="p">();</span>
-        <span class="n">ListNode</span> <span class="n">oddEvenList</span> <span class="o">=</span> <span class="n">solution</span><span class="p">.</span><span class="na">oddEvenList</span><span class="p">(</span><span class="n">head</span><span class="p">);</span>
-        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">oddEvenList</span><span class="p">);</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></div>
-
+    public static void main(String[] args) {
+        int[] nums = {1, 2, 3, 4, 5};
+        ListNode head = new ListNode(nums);
+        Solution solution = new Solution();
+        ListNode oddEvenList = solution.oddEvenList(head);
+        System.out.println(oddEvenList);
+    }
+}
+</code></pre>
 <h3 id="2">参考解答2（推荐）</h3>
 <ul>
 <li>注意1：我们采用一次跳过一个节点“穿针引线”的办法来完成这个问题；</li>
 <li>注意2：在 <code>while</code> 循环体中，如果结点个数是奇数的话，偶数索引的最后一个元素的 <code>next</code> 指针会指向一个 <code>null</code> （因为跳过一个结点改变 <code>next</code> 指针的操作是一起进行的），这一点完全可以分类讨论，因为就两种情况，如下图所示：</li>
 </ul>
 <p><img alt="img" src="https://liweiwei1419.github.io/images/leetcode-solution/328-1.jpg" /></p>
-<div class="codehilite"><pre><span></span><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Solution2</span> <span class="p">{</span>
+<pre><code class="language-java">
+public class Solution2 {
 
-    <span class="kd">public</span> <span class="n">ListNode</span> <span class="nf">oddEvenList</span><span class="p">(</span><span class="n">ListNode</span> <span class="n">head</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">if</span> <span class="p">(</span><span class="n">head</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">||</span> <span class="n">head</span><span class="p">.</span><span class="na">next</span> <span class="o">==</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
-            <span class="k">return</span> <span class="n">head</span><span class="p">;</span>
-        <span class="p">}</span>
-        <span class="n">ListNode</span> <span class="n">oddHead</span> <span class="o">=</span> <span class="n">head</span><span class="p">;</span>
-        <span class="n">ListNode</span> <span class="n">evenHead</span> <span class="o">=</span> <span class="n">head</span><span class="p">.</span><span class="na">next</span><span class="p">;</span>
+    public ListNode oddEvenList(ListNode head) {
+        if (head == null || head.next == null) {
+            return head;
+        }
+        ListNode oddHead = head;
+        ListNode evenHead = head.next;
 
-        <span class="n">ListNode</span> <span class="n">oddCur</span> <span class="o">=</span> <span class="n">oddHead</span><span class="p">;</span>
-        <span class="n">ListNode</span> <span class="n">evenCur</span> <span class="o">=</span> <span class="n">evenHead</span><span class="p">;</span>
-        <span class="c1">// 执行循环的条件不能写错</span>
-        <span class="k">while</span> <span class="p">(</span><span class="n">evenCur</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span> <span class="n">evenCur</span><span class="p">.</span><span class="na">next</span> <span class="o">!=</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
-            <span class="n">oddCur</span><span class="p">.</span><span class="na">next</span> <span class="o">=</span> <span class="n">oddCur</span><span class="p">.</span><span class="na">next</span><span class="p">.</span><span class="na">next</span><span class="p">;</span>
-            <span class="n">evenCur</span><span class="p">.</span><span class="na">next</span> <span class="o">=</span> <span class="n">evenCur</span><span class="p">.</span><span class="na">next</span><span class="p">.</span><span class="na">next</span><span class="p">;</span>
+        ListNode oddCur = oddHead;
+        ListNode evenCur = evenHead;
+        // 执行循环的条件不能写错
+        while (evenCur != null &amp;&amp; evenCur.next != null) {
+            oddCur.next = oddCur.next.next;
+            evenCur.next = evenCur.next.next;
 
-            <span class="n">oddCur</span> <span class="o">=</span> <span class="n">oddCur</span><span class="p">.</span><span class="na">next</span><span class="p">;</span>
-            <span class="n">evenCur</span> <span class="o">=</span> <span class="n">evenCur</span><span class="p">.</span><span class="na">next</span><span class="p">;</span>
-        <span class="p">}</span>
-        <span class="n">oddCur</span><span class="p">.</span><span class="na">next</span> <span class="o">=</span> <span class="n">evenHead</span><span class="p">;</span>
-        <span class="k">return</span> <span class="n">oddHead</span><span class="p">;</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></div>
-
+            oddCur = oddCur.next;
+            evenCur = evenCur.next;
+        }
+        oddCur.next = evenHead;
+        return oddHead;
+    }
+}
+</code></pre>
 <h3 id="2_1">参考解答2（推荐）</h3>
 <ul>
 <li>注意1：我们采用一次跳过一个节点“穿针引线”的办法来完成这个问题；</li>
 <li>注意2：在 <code>while</code> 循环体中，如果结点个数是奇数的话，偶数索引的最后一个元素的 <code>next</code> 指针会指向一个 <code>null</code> （因为跳过一个结点改变 <code>next</code> 指针的操作是一起进行的），这一点完全可以分类讨论，因为就两种情况，如下图所示：</li>
 </ul>
 <p><img alt="img" src="https://liweiwei1419.github.io/images/leetcode-solution/328-1.jpg" /></p>
-<div class="codehilite"><pre><span></span><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Solution2</span> <span class="p">{</span>
+<pre><code class="language-java">
+public class Solution2 {
 
-    <span class="kd">public</span> <span class="n">ListNode</span> <span class="nf">oddEvenList</span><span class="p">(</span><span class="n">ListNode</span> <span class="n">head</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">if</span> <span class="p">(</span><span class="n">head</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">||</span> <span class="n">head</span><span class="p">.</span><span class="na">next</span> <span class="o">==</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
-            <span class="k">return</span> <span class="n">head</span><span class="p">;</span>
-        <span class="p">}</span>
-        <span class="n">ListNode</span> <span class="n">oddHead</span> <span class="o">=</span> <span class="n">head</span><span class="p">;</span>
-        <span class="n">ListNode</span> <span class="n">evenHead</span> <span class="o">=</span> <span class="n">head</span><span class="p">.</span><span class="na">next</span><span class="p">;</span>
+    public ListNode oddEvenList(ListNode head) {
+        if (head == null || head.next == null) {
+            return head;
+        }
+        ListNode oddHead = head;
+        ListNode evenHead = head.next;
 
-        <span class="n">ListNode</span> <span class="n">oddCur</span> <span class="o">=</span> <span class="n">oddHead</span><span class="p">;</span>
-        <span class="n">ListNode</span> <span class="n">evenCur</span> <span class="o">=</span> <span class="n">evenHead</span><span class="p">;</span>
-        <span class="c1">// 执行循环的条件不能写错</span>
-        <span class="k">while</span> <span class="p">(</span><span class="n">evenCur</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span> <span class="n">evenCur</span><span class="p">.</span><span class="na">next</span> <span class="o">!=</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
-            <span class="n">oddCur</span><span class="p">.</span><span class="na">next</span> <span class="o">=</span> <span class="n">oddCur</span><span class="p">.</span><span class="na">next</span><span class="p">.</span><span class="na">next</span><span class="p">;</span>
-            <span class="n">evenCur</span><span class="p">.</span><span class="na">next</span> <span class="o">=</span> <span class="n">evenCur</span><span class="p">.</span><span class="na">next</span><span class="p">.</span><span class="na">next</span><span class="p">;</span>
+        ListNode oddCur = oddHead;
+        ListNode evenCur = evenHead;
+        // 执行循环的条件不能写错
+        while (evenCur != null &amp;&amp; evenCur.next != null) {
+            oddCur.next = oddCur.next.next;
+            evenCur.next = evenCur.next.next;
 
-            <span class="n">oddCur</span> <span class="o">=</span> <span class="n">oddCur</span><span class="p">.</span><span class="na">next</span><span class="p">;</span>
-            <span class="n">evenCur</span> <span class="o">=</span> <span class="n">evenCur</span><span class="p">.</span><span class="na">next</span><span class="p">;</span>
-        <span class="p">}</span>
-        <span class="n">oddCur</span><span class="p">.</span><span class="na">next</span> <span class="o">=</span> <span class="n">evenHead</span><span class="p">;</span>
-        <span class="k">return</span> <span class="n">oddHead</span><span class="p">;</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></div>
-
+            oddCur = oddCur.next;
+            evenCur = evenCur.next;
+        }
+        oddCur.next = evenHead;
+        return oddHead;
+    }
+}
+</code></pre>
 <p>Python 写法：</p>
-<div class="codehilite"><pre><span></span><code><span class="err">#</span> <span class="n">Definition</span> <span class="k">for</span> <span class="n">singly</span><span class="o">-</span><span class="n">linked</span> <span class="n">list</span><span class="p">.</span>
-<span class="kd">class</span> <span class="nf">ListNode</span><span class="p">(</span><span class="n">object</span><span class="p">):</span>
-    <span class="n">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
-        <span class="n">self</span><span class="p">.</span><span class="na">val</span> <span class="o">=</span> <span class="n">x</span>
-        <span class="n">self</span><span class="p">.</span><span class="na">next</span> <span class="o">=</span> <span class="n">None</span>
+<pre><code class="language-java"># Definition for singly-linked list.
+class ListNode(object):
+    def __init__(self, x):
+        self.val = x
+        self.next = None
 
 
-<span class="kd">class</span> <span class="nc">Solution</span><span class="p">:</span>
-    <span class="n">def</span> <span class="nf">oddEvenList</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">head</span><span class="p">):</span>
-        <span class="s">&quot;&quot;&quot;</span>
-<span class="s">        :type head: ListNode</span>
-<span class="s">        :rtype: ListNode</span>
-<span class="s">        &quot;&quot;&quot;</span>
+class Solution:
+    def oddEvenList(self, head):
+        &quot;&quot;&quot;
+        :type head: ListNode
+        :rtype: ListNode
+        &quot;&quot;&quot;
 
-        <span class="k">if</span> <span class="n">head</span> <span class="n">is</span> <span class="n">None</span> <span class="n">or</span> <span class="n">head</span><span class="p">.</span><span class="na">next</span> <span class="n">is</span> <span class="n">None</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">head</span>
+        if head is None or head.next is None:
+            return head
 
-        <span class="err">#</span> <span class="n">odd</span> <span class="n">奇数</span>
-        <span class="n">odd_head</span> <span class="o">=</span> <span class="n">head</span>
-        <span class="n">even_head</span> <span class="o">=</span> <span class="n">head</span><span class="p">.</span><span class="na">next</span>
+        # odd 奇数
+        odd_head = head
+        even_head = head.next
 
-        <span class="n">odd_cur</span> <span class="o">=</span> <span class="n">odd_head</span>
-        <span class="n">even_cur</span> <span class="o">=</span> <span class="n">even_head</span>
+        odd_cur = odd_head
+        even_cur = even_head
 
-        <span class="k">while</span> <span class="n">even_cur</span> <span class="n">and</span> <span class="n">even_cur</span><span class="p">.</span><span class="na">next</span><span class="p">:</span>
-            <span class="n">odd_cur</span><span class="p">.</span><span class="na">next</span> <span class="o">=</span> <span class="n">odd_cur</span><span class="p">.</span><span class="na">next</span><span class="p">.</span><span class="na">next</span>
-            <span class="n">even_cur</span><span class="p">.</span><span class="na">next</span> <span class="o">=</span> <span class="n">even_cur</span><span class="p">.</span><span class="na">next</span><span class="p">.</span><span class="na">next</span>
+        while even_cur and even_cur.next:
+            odd_cur.next = odd_cur.next.next
+            even_cur.next = even_cur.next.next
 
-            <span class="n">odd_cur</span> <span class="o">=</span> <span class="n">odd_cur</span><span class="p">.</span><span class="na">next</span>
-            <span class="n">even_cur</span> <span class="o">=</span> <span class="n">even_cur</span><span class="p">.</span><span class="na">next</span>
+            odd_cur = odd_cur.next
+            even_cur = even_cur.next
 
-        <span class="n">odd_cur</span><span class="p">.</span><span class="na">next</span> <span class="o">=</span> <span class="n">even_head</span>
-        <span class="k">return</span> <span class="n">odd_head</span>
-</code></pre></div>
-
+        odd_cur.next = even_head
+        return odd_head
+</code></pre>
 <p>思路概述：</p>
 <p>在遍历的过程中，标记奇数节点和偶数节点，把奇数节点和偶数节点分开。最后把奇数节点的最后一个节点指向偶数节点的开始节点，具体细节请见代码。</p>
 <p>我的解答：</p>
-<div class="codehilite"><pre><span></span><code><span class="kd">class</span> <span class="nc">ListNode</span> <span class="p">{</span>
-    <span class="kt">int</span> <span class="n">val</span><span class="p">;</span>
-    <span class="n">ListNode</span> <span class="n">next</span><span class="p">;</span>
+<pre><code class="language-java">
+class ListNode {
+    int val;
+    ListNode next;
 
-    <span class="n">ListNode</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">val</span> <span class="o">=</span> <span class="n">x</span><span class="p">;</span>
-    <span class="p">}</span>
-<span class="p">}</span>
+    ListNode(int x) {
+        val = x;
+    }
+}
 
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+public class Solution {
 
-    <span class="kd">public</span> <span class="n">ListNode</span> <span class="nf">oddEvenList</span><span class="p">(</span><span class="n">ListNode</span> <span class="n">head</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">if</span> <span class="p">(</span><span class="n">head</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">||</span> <span class="n">head</span><span class="p">.</span><span class="na">next</span> <span class="o">==</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
-            <span class="k">return</span> <span class="n">head</span><span class="p">;</span>
-        <span class="p">}</span>
-        <span class="n">ListNode</span> <span class="n">oddHead</span> <span class="o">=</span> <span class="n">head</span><span class="p">;</span>
-        <span class="n">ListNode</span> <span class="n">evenHead</span> <span class="o">=</span> <span class="n">oddHead</span><span class="p">.</span><span class="na">next</span><span class="p">;</span>
-        <span class="n">ListNode</span> <span class="n">oddNode</span> <span class="o">=</span> <span class="n">oddHead</span><span class="p">;</span>
-        <span class="n">ListNode</span> <span class="n">evenNode</span> <span class="o">=</span> <span class="n">evenHead</span><span class="p">;</span>
-        <span class="n">ListNode</span> <span class="n">currentNode</span> <span class="o">=</span> <span class="n">evenHead</span><span class="p">.</span><span class="na">next</span><span class="p">;</span>
-        <span class="kt">boolean</span> <span class="n">isodd</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
-        <span class="k">while</span> <span class="p">(</span><span class="n">currentNode</span> <span class="o">!=</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
-            <span class="k">if</span> <span class="p">(</span><span class="n">isodd</span><span class="p">)</span> <span class="p">{</span>
-                <span class="n">oddNode</span><span class="p">.</span><span class="na">next</span> <span class="o">=</span> <span class="n">currentNode</span><span class="p">;</span>
-                <span class="n">oddNode</span> <span class="o">=</span> <span class="n">currentNode</span><span class="p">;</span>
-            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-                <span class="n">evenNode</span><span class="p">.</span><span class="na">next</span> <span class="o">=</span> <span class="n">currentNode</span><span class="p">;</span>
-                <span class="n">evenNode</span> <span class="o">=</span> <span class="n">currentNode</span><span class="p">;</span>
-            <span class="p">}</span>
-            <span class="n">isodd</span> <span class="o">=</span> <span class="o">!</span><span class="n">isodd</span><span class="p">;</span>
-            <span class="n">currentNode</span> <span class="o">=</span> <span class="n">currentNode</span><span class="p">.</span><span class="na">next</span><span class="p">;</span>
-        <span class="p">}</span>
-        <span class="n">isodd</span> <span class="o">=</span> <span class="o">!</span><span class="n">isodd</span><span class="p">;</span>
-        <span class="k">if</span> <span class="p">(</span><span class="n">isodd</span><span class="p">)</span> <span class="p">{</span>
-            <span class="n">oddNode</span><span class="p">.</span><span class="na">next</span> <span class="o">=</span> <span class="n">evenHead</span><span class="p">;</span>
-            <span class="n">evenNode</span><span class="p">.</span><span class="na">next</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
-        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-            <span class="n">oddNode</span><span class="p">.</span><span class="na">next</span> <span class="o">=</span> <span class="n">evenHead</span><span class="p">;</span>
-        <span class="p">}</span>
-        <span class="k">return</span> <span class="n">oddHead</span><span class="p">;</span>
-    <span class="p">}</span>
-
-
-    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">ListNode</span> <span class="n">node1</span> <span class="o">=</span> <span class="n">createListNode</span><span class="p">(</span><span class="k">new</span> <span class="kt">int</span><span class="o">[]</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">});</span>
-        <span class="n">Solution</span> <span class="n">solution</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Solution</span><span class="p">();</span>
-        <span class="n">ListNode</span> <span class="n">result1</span> <span class="o">=</span> <span class="n">solution</span><span class="p">.</span><span class="na">oddEvenList</span><span class="p">(</span><span class="n">node1</span><span class="p">);</span>
-        <span class="n">printLinkedList</span><span class="p">(</span><span class="n">result1</span><span class="p">);</span>
-
-        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;------&quot;</span><span class="p">);</span>
+    public ListNode oddEvenList(ListNode head) {
+        if (head == null || head.next == null) {
+            return head;
+        }
+        ListNode oddHead = head;
+        ListNode evenHead = oddHead.next;
+        ListNode oddNode = oddHead;
+        ListNode evenNode = evenHead;
+        ListNode currentNode = evenHead.next;
+        boolean isodd = true;
+        while (currentNode != null) {
+            if (isodd) {
+                oddNode.next = currentNode;
+                oddNode = currentNode;
+            } else {
+                evenNode.next = currentNode;
+                evenNode = currentNode;
+            }
+            isodd = !isodd;
+            currentNode = currentNode.next;
+        }
+        isodd = !isodd;
+        if (isodd) {
+            oddNode.next = evenHead;
+            evenNode.next = null;
+        } else {
+            oddNode.next = evenHead;
+        }
+        return oddHead;
+    }
 
 
-        <span class="n">ListNode</span> <span class="n">node2</span> <span class="o">=</span> <span class="n">createListNode</span><span class="p">(</span><span class="k">new</span> <span class="kt">int</span><span class="o">[]</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">});</span>
-        <span class="n">ListNode</span> <span class="n">result2</span> <span class="o">=</span> <span class="n">solution</span><span class="p">.</span><span class="na">oddEvenList</span><span class="p">(</span><span class="n">node2</span><span class="p">);</span>
-        <span class="n">printLinkedList</span><span class="p">(</span><span class="n">result2</span><span class="p">);</span>
+    public static void main(String[] args) {
+        ListNode node1 = createListNode(new int[]{1, 2, 3, 4, 5});
+        Solution solution = new Solution();
+        ListNode result1 = solution.oddEvenList(node1);
+        printLinkedList(result1);
 
-        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;------&quot;</span><span class="p">);</span>
+        System.out.println(&quot;------&quot;);
 
 
-        <span class="n">ListNode</span> <span class="n">node3</span> <span class="o">=</span> <span class="n">createListNode</span><span class="p">(</span><span class="k">new</span> <span class="kt">int</span><span class="o">[]</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">});</span>
-        <span class="n">ListNode</span> <span class="n">result3</span> <span class="o">=</span> <span class="n">solution</span><span class="p">.</span><span class="na">oddEvenList</span><span class="p">(</span><span class="n">node3</span><span class="p">);</span>
-        <span class="n">printLinkedList</span><span class="p">(</span><span class="n">result3</span><span class="p">);</span>
-    <span class="p">}</span>
+        ListNode node2 = createListNode(new int[]{1, 2, 3, 4});
+        ListNode result2 = solution.oddEvenList(node2);
+        printLinkedList(result2);
 
-    <span class="kd">public</span> <span class="kd">static</span> <span class="n">ListNode</span> <span class="nf">createListNode</span><span class="p">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">if</span> <span class="p">(</span><span class="n">nums</span><span class="p">.</span><span class="na">length</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
-            <span class="k">return</span> <span class="kc">null</span><span class="p">;</span>
-        <span class="p">}</span>
-        <span class="n">ListNode</span> <span class="n">head</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ListNode</span><span class="p">(</span><span class="n">nums</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span><span class="p">);</span>
-        <span class="n">ListNode</span> <span class="n">curNode</span> <span class="o">=</span> <span class="n">head</span><span class="p">;</span>
-        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">nums</span><span class="p">.</span><span class="na">length</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-            <span class="n">curNode</span><span class="p">.</span><span class="na">next</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ListNode</span><span class="p">(</span><span class="n">nums</span><span class="o">[</span><span class="n">i</span><span class="o">]</span><span class="p">);</span>
-            <span class="n">curNode</span> <span class="o">=</span> <span class="n">curNode</span><span class="p">.</span><span class="na">next</span><span class="p">;</span>
-        <span class="p">}</span>
-        <span class="k">return</span> <span class="n">head</span><span class="p">;</span>
-    <span class="p">}</span>
+        System.out.println(&quot;------&quot;);
 
-    <span class="c1">// 超级简单的一个工具方法</span>
-    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">printLinkedList</span><span class="p">(</span><span class="n">ListNode</span> <span class="n">head</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">ListNode</span> <span class="n">curNode</span> <span class="o">=</span> <span class="n">head</span><span class="p">;</span>
-        <span class="k">while</span> <span class="p">(</span><span class="n">curNode</span> <span class="o">!=</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
-            <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">printf</span><span class="p">(</span><span class="s">&quot;%s\t&quot;</span><span class="p">,</span> <span class="n">curNode</span><span class="p">.</span><span class="na">val</span><span class="p">);</span>
-            <span class="n">curNode</span> <span class="o">=</span> <span class="n">curNode</span><span class="p">.</span><span class="na">next</span><span class="p">;</span>
-        <span class="p">}</span>
-        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">printf</span><span class="p">(</span><span class="s">&quot;null&quot;</span><span class="p">);</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></div>
 
+        ListNode node3 = createListNode(new int[]{1, 2});
+        ListNode result3 = solution.oddEvenList(node3);
+        printLinkedList(result3);
+    }
+
+    public static ListNode createListNode(int[] nums) {
+        if (nums.length == 0) {
+            return null;
+        }
+        ListNode head = new ListNode(nums[0]);
+        ListNode curNode = head;
+        for (int i = 1; i &lt; nums.length; i++) {
+            curNode.next = new ListNode(nums[i]);
+            curNode = curNode.next;
+        }
+        return head;
+    }
+
+    // 超级简单的一个工具方法
+    public static void printLinkedList(ListNode head) {
+        ListNode curNode = head;
+        while (curNode != null) {
+            System.out.printf(&quot;%s\t&quot;, curNode.val);
+            curNode = curNode.next;
+        }
+        System.out.printf(&quot;null&quot;);
+    }
+}
+</code></pre>
 <p>网友的解答：http://blog.csdn.net/guicaisa/article/details/50557475 显然，网友的解法会更简洁一些： 根据网友的解答自己写了一遍：</p>
-<div class="codehilite"><pre><span></span><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Solution2</span> <span class="p">{</span>
+<pre><code class="language-java">public class Solution2 {
 
-    <span class="kd">public</span> <span class="n">ListNode</span> <span class="nf">oddEvenList</span><span class="p">(</span><span class="n">ListNode</span> <span class="n">head</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">if</span> <span class="p">(</span><span class="n">head</span> <span class="o">==</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
-            <span class="k">return</span> <span class="n">head</span><span class="p">;</span>
-        <span class="p">}</span>
-        <span class="n">ListNode</span> <span class="n">oddNode</span> <span class="o">=</span> <span class="n">head</span><span class="p">;</span>
-        <span class="n">ListNode</span> <span class="n">evenNode</span> <span class="o">=</span> <span class="n">head</span><span class="p">.</span><span class="na">next</span><span class="p">;</span>
-        <span class="n">ListNode</span> <span class="n">evenHead</span> <span class="o">=</span> <span class="n">evenNode</span><span class="p">;</span>
-        <span class="k">while</span> <span class="p">(</span><span class="n">evenNode</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span> <span class="n">evenNode</span><span class="p">.</span><span class="na">next</span> <span class="o">!=</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
-            <span class="n">oddNode</span><span class="p">.</span><span class="na">next</span> <span class="o">=</span> <span class="n">evenNode</span><span class="p">.</span><span class="na">next</span><span class="p">;</span>
-            <span class="n">oddNode</span> <span class="o">=</span> <span class="n">oddNode</span><span class="p">.</span><span class="na">next</span><span class="p">;</span>
-            <span class="n">evenNode</span><span class="p">.</span><span class="na">next</span> <span class="o">=</span> <span class="n">oddNode</span><span class="p">.</span><span class="na">next</span><span class="p">;</span>
-            <span class="n">evenNode</span> <span class="o">=</span> <span class="n">evenNode</span><span class="p">.</span><span class="na">next</span><span class="p">;</span>
-        <span class="p">}</span>
-        <span class="n">oddNode</span><span class="p">.</span><span class="na">next</span> <span class="o">=</span> <span class="n">evenHead</span><span class="p">;</span>
-        <span class="k">return</span> <span class="n">head</span><span class="p">;</span>
-    <span class="p">}</span>
-
-
-    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">ListNode</span> <span class="n">node1</span> <span class="o">=</span> <span class="n">createListNode</span><span class="p">(</span><span class="k">new</span> <span class="kt">int</span><span class="o">[]</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">});</span>
-        <span class="n">Solution2</span> <span class="n">solution</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Solution2</span><span class="p">();</span>
-        <span class="n">ListNode</span> <span class="n">result1</span> <span class="o">=</span> <span class="n">solution</span><span class="p">.</span><span class="na">oddEvenList</span><span class="p">(</span><span class="n">node1</span><span class="p">);</span>
-        <span class="n">printLinkedList</span><span class="p">(</span><span class="n">result1</span><span class="p">);</span>
-
-        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;------&quot;</span><span class="p">);</span>
+    public ListNode oddEvenList(ListNode head) {
+        if (head == null) {
+            return head;
+        }
+        ListNode oddNode = head;
+        ListNode evenNode = head.next;
+        ListNode evenHead = evenNode;
+        while (evenNode != null &amp;&amp; evenNode.next != null) {
+            oddNode.next = evenNode.next;
+            oddNode = oddNode.next;
+            evenNode.next = oddNode.next;
+            evenNode = evenNode.next;
+        }
+        oddNode.next = evenHead;
+        return head;
+    }
 
 
-        <span class="n">ListNode</span> <span class="n">node2</span> <span class="o">=</span> <span class="n">createListNode</span><span class="p">(</span><span class="k">new</span> <span class="kt">int</span><span class="o">[]</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">});</span>
-        <span class="n">ListNode</span> <span class="n">result2</span> <span class="o">=</span> <span class="n">solution</span><span class="p">.</span><span class="na">oddEvenList</span><span class="p">(</span><span class="n">node2</span><span class="p">);</span>
-        <span class="n">printLinkedList</span><span class="p">(</span><span class="n">result2</span><span class="p">);</span>
+    public static void main(String[] args) {
+        ListNode node1 = createListNode(new int[]{1, 2, 3, 4, 5});
+        Solution2 solution = new Solution2();
+        ListNode result1 = solution.oddEvenList(node1);
+        printLinkedList(result1);
 
-        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;------&quot;</span><span class="p">);</span>
+        System.out.println(&quot;------&quot;);
 
 
-        <span class="n">ListNode</span> <span class="n">node3</span> <span class="o">=</span> <span class="n">createListNode</span><span class="p">(</span><span class="k">new</span> <span class="kt">int</span><span class="o">[]</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">});</span>
-        <span class="n">ListNode</span> <span class="n">result3</span> <span class="o">=</span> <span class="n">solution</span><span class="p">.</span><span class="na">oddEvenList</span><span class="p">(</span><span class="n">node3</span><span class="p">);</span>
-        <span class="n">printLinkedList</span><span class="p">(</span><span class="n">result3</span><span class="p">);</span>
-    <span class="p">}</span>
+        ListNode node2 = createListNode(new int[]{1, 2, 3, 4});
+        ListNode result2 = solution.oddEvenList(node2);
+        printLinkedList(result2);
 
-    <span class="kd">public</span> <span class="kd">static</span> <span class="n">ListNode</span> <span class="nf">createListNode</span><span class="p">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">if</span> <span class="p">(</span><span class="n">nums</span><span class="p">.</span><span class="na">length</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
-            <span class="k">return</span> <span class="kc">null</span><span class="p">;</span>
-        <span class="p">}</span>
-        <span class="n">ListNode</span> <span class="n">head</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ListNode</span><span class="p">(</span><span class="n">nums</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span><span class="p">);</span>
-        <span class="n">ListNode</span> <span class="n">curNode</span> <span class="o">=</span> <span class="n">head</span><span class="p">;</span>
-        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">nums</span><span class="p">.</span><span class="na">length</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-            <span class="n">curNode</span><span class="p">.</span><span class="na">next</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ListNode</span><span class="p">(</span><span class="n">nums</span><span class="o">[</span><span class="n">i</span><span class="o">]</span><span class="p">);</span>
-            <span class="n">curNode</span> <span class="o">=</span> <span class="n">curNode</span><span class="p">.</span><span class="na">next</span><span class="p">;</span>
-        <span class="p">}</span>
-        <span class="k">return</span> <span class="n">head</span><span class="p">;</span>
-    <span class="p">}</span>
+        System.out.println(&quot;------&quot;);
 
-    <span class="c1">// 超级简单的一个工具方法</span>
-    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">printLinkedList</span><span class="p">(</span><span class="n">ListNode</span> <span class="n">head</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">ListNode</span> <span class="n">curNode</span> <span class="o">=</span> <span class="n">head</span><span class="p">;</span>
-        <span class="k">while</span> <span class="p">(</span><span class="n">curNode</span> <span class="o">!=</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
-            <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">printf</span><span class="p">(</span><span class="s">&quot;%s\t&quot;</span><span class="p">,</span> <span class="n">curNode</span><span class="p">.</span><span class="na">val</span><span class="p">);</span>
-            <span class="n">curNode</span> <span class="o">=</span> <span class="n">curNode</span><span class="p">.</span><span class="na">next</span><span class="p">;</span>
-        <span class="p">}</span>
-        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">printf</span><span class="p">(</span><span class="s">&quot;null&quot;</span><span class="p">);</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></div>
 
+        ListNode node3 = createListNode(new int[]{1, 2});
+        ListNode result3 = solution.oddEvenList(node3);
+        printLinkedList(result3);
+    }
+
+    public static ListNode createListNode(int[] nums) {
+        if (nums.length == 0) {
+            return null;
+        }
+        ListNode head = new ListNode(nums[0]);
+        ListNode curNode = head;
+        for (int i = 1; i &lt; nums.length; i++) {
+            curNode.next = new ListNode(nums[i]);
+            curNode = curNode.next;
+        }
+        return head;
+    }
+
+    // 超级简单的一个工具方法
+    public static void printLinkedList(ListNode head) {
+        ListNode curNode = head;
+        while (curNode != null) {
+            System.out.printf(&quot;%s\t&quot;, curNode.val);
+            curNode = curNode.next;
+        }
+        System.out.printf(&quot;null&quot;);
+    }
+}
+</code></pre>
 <p>本篇文章的地址为 https://liweiwei1419.github.io/leetcode-solution/leetcode-0328-odd-even-linked-list ，如果我的题解有错误，或者您有更好的解法，欢迎您告诉我 <a href="https://liweiwei1419.github.io/leetcode-solution/leetcode-0328-odd-even-linked-list/liweiwei1419@gmail.com">liweiwei1419@gmail.com</a></p>
               
             </div>
